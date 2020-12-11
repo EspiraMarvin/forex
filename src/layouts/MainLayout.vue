@@ -15,7 +15,7 @@
           Forex Stock Exchange
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>v.1.0.0</div>
       </q-toolbar>
     </q-header>
 

@@ -7,26 +7,29 @@ const state = () => ({
 })
 
 const getters = {
+  GET_STOCKS: state => state.stocks,
   GET_FETCHING_STOCKS: state => state.fetchingStocks
 }
 
 const mutations = {
-  SET_FETCHING_STOCKS (state, value) {
-    state.fetchingStocks = value
+  SET_STOCKS (state, value) {
+    state.stocks = value
   },
 
-  SET_STOCKS (state, value) {
-    state.messages = value
+  SET_FETCHING_STOCKS (state, value) {
+    state.fetchingStocks = value
   }
+
 }
 
 const actions = {
-  FETCH_STOCKS (context, filters) {
-    context.commit('SET_FETCHING_MESSAGES', true)
-    axios.get(`https://www.scorebat.com/video-api/v1?page=${filters.page} &filters=${JSON.stringify(filters)}`)
+  FETCH_STOCKS (context) {
+    context.commit('SET_FETCHING_STOCKS', true)
+    axios.get('https://www.scorebat.com/video-api/v1')
       .then(({ data }) => {
         context.commit('SET_FETCHING_STOCKS', false)
         context.commit('SET_STOCKS', data)
+        console.log('store', data)
       })
       .catch(error => {
         context.commit('SET_FETCHING_STOCKS', false)
